@@ -49,11 +49,11 @@
 
 ```
 After downloading → **Extract (Unzip)** the file.
-2.  Open Chrome and navigate to `chrome://extensions`.
-3.  Toggle **Developer mode** (top right corner) to **ON**.
-4.  Click **Load unpacked**.
-5.  Select the `coursera_extension` folder from the downloaded files.
-6.  Examples: `C:\Users\...\Coursera-Automation\coursera_extension`
+1.  Open Chrome and navigate to `chrome://extensions`.
+2.  Toggle **Developer mode** (top right corner) to **ON**.
+3.  Click **Load unpacked**.
+4.  Select the `coursera_extension` folder from the downloaded files.
+5.  Examples: `C:\Users\...\Coursera-Automation\coursera_extension`
 ```
 ## 🚀 Usage
 
