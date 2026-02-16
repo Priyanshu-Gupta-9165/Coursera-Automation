@@ -1,12 +1,12 @@
-:root {
-    --bg-color: #e0e5ec;
-    --text-main: #4a4a4a;
-    --text-light: #8daec9;
-    --primary: #0056D2; /* Coursera Blue */
-    --shadow-light: #ffffff;
-    --shadow-dark: #a3b1c6;
-    --card-bg: #e0e5ec;
-}
+    :root {
+        --bg-color: #e0e5ec;
+        --text-main: #4a4a4a;
+        --text-light: #8daec9;
+        --primary: #0056d2; /* Coursera Blue */
+        --shadow-light: #ffffff;
+        --shadow-dark: #a3b1c6;
+        --card-bg: #e0e5ec;
+    }
 
 body {
     background-color: var(--bg-color);
