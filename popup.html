@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 250px;
+            padding: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #0056D2;
+            /* Coursera Blue */
+            text-align: center;
+        }
+
+        .status-box {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        #status {
+            font-weight: bold;
+            color: #666;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        #startBtn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #startBtn:hover {
+            background-color: #218838;
+        }
+
+        #stopBtn {
+            background-color: #dc3545;
+            color: white;
+            display: none;
+        }
+
+        #stopBtn:hover {
+            background-color: #c82333;
+        }
+
+        .footer {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <img src="icon.png" style="width: 48px; height: 48px; margin-bottom: 5px;">
+    </div>
+    <h2>Coursera Auto</h2>
+
+    <div class="status-box">
+        Status: <span id="status">Idle</span>
+    </div>
+
+    <button id="startBtn">Start Automation ⚡</button>
+    <button id="stopBtn">Stop Automation ◼</button>
+
+    <div style="margin-top: 15px; border-top: 1px solid #ddd; padding-top: 10px;">
+        <button id="aboutBtn" style="background-color: #6c757d; color: white; font-size: 12px; padding: 5px;">About
+            Developer ✪</button>
+    </div>
+
+    <div class="footer">
+        Use responsibly. Happy learning!
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

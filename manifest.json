@@ -1,0 +1,39 @@
+{
+    "manifest_version": 3,
+    "name": "Coursera Auto-Completer",
+    "version": "1.0",
+    "author": "Priyanshu Gupta",
+    "description": "Automatically completes Coursera videos and readings instantly.",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage"
+    ],
+    "host_permissions": [
+        "*://*.coursera.org/*"
+    ],
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icon.png",
+            "48": "icon.png",
+            "128": "icon.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.coursera.org/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
+    ]
+}
