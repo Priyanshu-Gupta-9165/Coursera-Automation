@@ -21,6 +21,7 @@
 
 *Beautiful neumorphic UI • 100% Private • Zero data collection*
 </div>
+
 ---
 
 ## ✨ **Features**
@@ -35,26 +36,28 @@
 | 🎨 **Neumorphic UI** | Clean, modern and soft UI design for easy control and smooth experience. |
 </div>
 
+---
 
 ## 🛠️ Installation Guide
 
 > Since this is a Chrome Extension, it must be installed manually using **Developer Mode**.
 
----
 
 ### ⤓ Download the Project
   <a href="https://github.com/Priyanshu-Gupta-9165/Coursera-Automation/archive/refs/heads/main.zip">
     <img src="https://img.shields.io/badge/⬇️%20Download-Extension-blue?style=for-the-badge&logo=googlechrome&logoColor=white" />
   </a>
 
-```
+
 After downloading → **Extract (Unzip)** the file.
 1.  Open Chrome and navigate to `chrome://extensions`.
 2.  Toggle **Developer mode** (top right corner) to **ON**.
 3.  Click **Load unpacked**.
 4.  Select the `coursera_extension` folder from the downloaded files.
 5.  Examples: `C:\Users\...\Coursera-Automation\coursera_extension`
-```
+
+---
+
 ## 🚀 Usage
 
 1.  Open any Coursera course item (Video or Reading).
@@ -65,10 +68,14 @@ After downloading → **Extract (Unzip)** the file.
     - Mark the reading as read.
     - Go to the next item automatically.
 
+---
+
 ## ⚙️ Configuration
 
 - **Start/Stop**: Use the toggle button in the popup to pause automation at any time.
 - **About**: Click the "About Developer" button to see credits and links.
+
+---
 
 ## 👨‍💻 Developer
 <div align="center">
@@ -82,9 +89,13 @@ After downloading → **Extract (Unzip)** the file.
 [![YouTube](https://img.shields.io/badge/Subscribe-FF0000?style=for-the-badge&logo=youtube)](https://www.youtube.com/@Code2Tech_404)
 </div>
 
+---
+
 ## ⚠️ Disclaimer
 
 This tool is for **educational purposes only**. Using automation tools on Coursera may violate their Terms of Service. Use responsibly and at your own risk.
+
+---
 
 ## ⭐ Support This Project
 
@@ -104,6 +115,7 @@ This tool is for **educational purposes only**. Using automation tools on Course
 
 <div align="center">
 
+---
 ---
 
 *Built with ➲ Priyanshu Gupta*
