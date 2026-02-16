@@ -43,7 +43,7 @@
 > Since this is a Chrome Extension, it must be installed manually using **Developer Mode**.
 
 
-### ⤓ Download the Project
+### ⟱ Download the Project
   <a href="https://github.com/Priyanshu-Gupta-9165/Coursera-Automation/archive/refs/heads/main.zip">
     <img src="https://img.shields.io/badge/⬇️%20Download-Extension-blue?style=for-the-badge&logo=googlechrome&logoColor=white" />
   </a>
