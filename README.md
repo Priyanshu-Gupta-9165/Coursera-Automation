@@ -17,7 +17,7 @@
 
 <br>
 
-**A powerful Chrome extension to automate Coursera tasks — skip videos, complete readings, control speed, and more!**
+**A powerful Chrome extension to automate Coursera tasks — skip videos, complete readings, and more!**
 
 *Beautiful neumorphic UI • 100% Private • Zero data collection*
 </div>
