@@ -1,36 +1,60 @@
+<div align="center">
+  
 # 💡 Coursera Automation Extension
+![Platform](https://img.shields.io/badge/platform-Chrome-yellow.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg) ![Chrome](https://img.shields.io/badge/platform-Chrome-yellow.svg)
+![Stars](https://img.shields.io/github/stars/Priyanshu-Gupta-9165/Coursera-Automation?style=social)
+![Forks](https://img.shields.io/github/forks/Priyanshu-Gupta-9165/Coursera-Automation?style=social)
+![Watchers](https://img.shields.io/github/watchers/Priyanshu-Gupta-9165/Coursera-Automation?style=social)
 
-**Your smart companion for faster Coursera course completion.**  
-This Chrome Extension automates repetitive tasks like seeking videos to the end, auto-completing readings, and handling navigation, allowing you to focus on what matters.
+![Issues](https://img.shields.io/github/issues/Priyanshu-Gupta-9165/Coursera-Automation)
+![Pull Requests](https://img.shields.io/github/issues-pr/Priyanshu-Gupta-9165/Coursera-Automation)
+![Contributors](https://img.shields.io/github/contributors/Priyanshu-Gupta-9165/Coursera-Automation)
+![Last Commit](https://img.shields.io/github/last-commit/Priyanshu-Gupta-9165/Coursera-Automation)
+![Repo Size](https://img.shields.io/github/repo-size/Priyanshu-Gupta-9165/Coursera-Automation)
+![License](https://img.shields.io/github/license/Priyanshu-Gupta-9165/Coursera-Automation)
 
-<p align="center">
-  <img src="icon.png" width="128" alt="Coursera Automation Icon">
-</p>
+<br>
 
-## ✨ Features
+**A powerful Chrome extension to automate Coursera tasks — skip videos, complete readings, control speed, and more!**
 
-- **⚡ Instant Video Completion**: Automatically detects ongoing videos and seeks them to the end (triggering completion).
-- **📖 Auto-Reading**: Automatically crawls reading pages, scrolls to the bottom, and clicks "Mark as Complete".
-- **⏭️ Smart Navigation**: Auto-clicks "Next" buttons to keep you moving through the course.
-- **🔒 100% Private**: All logic runs locally on your browser. No data collection.
-- **🎨 Neumorphic UI**: A beautiful, modern interface for easy control.
+*Beautiful neumorphic UI • 100% Private • Zero data collection*
+</div>
+---
 
-## 🛠 Installation
+## ✨ **Features**
+<div align="center">
+  
+| Feature | Description |
+|:---:|:---|
+| ⚡**Instant Video Completion** | Detects active videos and jumps them to the end automatically — course video marked as completed. |
+| 📖 **Auto-Reading Mode** | Scans reading pages, scrolls to the bottom, and clicks **"Mark as Complete"** for you. |
+| ⏭️ **Smart Navigation** | Automatically presses the **Next** button so you can progress without manual clicks. |
+| 🔒 **100% Private & Safe** | Everything runs locally inside your browser — **no tracking, no data collection**. |
+| 🎨 **Neumorphic UI** | Clean, modern and soft UI design for easy control and smooth experience. |
+</div>
 
-Since this is a custom automation tool, you need to install it manually in Chrome (Developer Mode):
 
-1.  **Download/Clone** this repository:
-    ```bash
-    git clone https://github.com/Priyanshu-Gupta-9165/Coursera-Automation.git
-    ```
+## 🛠️ Installation Guide
+
+> Since this is a Chrome Extension, it must be installed manually using **Developer Mode**.
+
+---
+
+### ⤓ Download the Project
+  <a href="https://github.com/Priyanshu-Gupta-9165/Coursera-Automation/archive/refs/heads/main.zip">
+    <img src="https://img.shields.io/badge/⬇️%20Download-Extension-blue?style=for-the-badge&logo=googlechrome&logoColor=white" />
+  </a>
+
+```
+After downloading → **Extract (Unzip)** the file.
 2.  Open Chrome and navigate to `chrome://extensions`.
 3.  Toggle **Developer mode** (top right corner) to **ON**.
 4.  Click **Load unpacked**.
 5.  Select the `coursera_extension` folder from the downloaded files.
 6.  Examples: `C:\Users\...\Coursera-Automation\coursera_extension`
-
+```
 ## 🚀 Usage
 
 1.  Open any Coursera course item (Video or Reading).
@@ -47,18 +71,43 @@ Since this is a custom automation tool, you need to install it manually in Chrom
 - **About**: Click the "About Developer" button to see credits and links.
 
 ## 👨‍💻 Developer
+<div align="center">
 
-**Priyanshu Gupta**  
-Full Stack Developer
+**Priyanshu Gupta**
+
+*Full Stack Developer*
 
 [![GitHub](https://img.shields.io/badge/GitHub-Priyanshu--Gupta--9165-181717?style=for-the-badge&logo=github)](https://github.com/Priyanshu-Gupta-9165)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Priyanshu--Gupta-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/priyanshu-gupta-dev)
-[![YouTube](https://img.shields.io/badge/YouTube-Code2Tech__404-FF0000?style=for-the-badge&logo=youtube)](https://www.youtube.com/@Code2Tech_404)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/priyanshu-gupta-dev)
+[![YouTube](https://img.shields.io/badge/Subscribe-FF0000?style=for-the-badge&logo=youtube)](https://www.youtube.com/@Code2Tech_404)
+</div>
 
 ## ⚠️ Disclaimer
 
 This tool is for **educational purposes only**. Using automation tools on Coursera may violate their Terms of Service. Use responsibly and at your own risk.
 
-## ⭐ Support
+## ⭐ Support This Project
 
-If you found this useful, please **give it a Star** on GitHub! 🌟
+</div>
+
+<div align="center">
+
+**If this extension helped you, please consider giving it a ⭐ star!**
+
+*Your support motivates me to keep building and improving* 🙏
+
+[![Star on GitHub](https://img.shields.io/badge/⭐_Star_on_GitHub-Click_Here-gold?style=for-the-badge)](https://github.com/Priyanshu-Gupta-9165/Coursera-Automation-Extension)
+
+</div>
+
+<br>
+
+<div align="center">
+
+---
+
+*Built with ➲ Priyanshu Gupta*
+
+**© 2026 Coursera Automation Extension. All rights reserved.**
+
+</div>
