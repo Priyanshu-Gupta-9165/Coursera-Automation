@@ -21,6 +21,7 @@
 
 *Beautiful neumorphic UI • 100% Private • Zero data collection*
 </div>
+
 ---
 
 ## ✨ **Features**
@@ -34,6 +35,8 @@
 | 🔒 **100% Private & Safe** | Everything runs locally inside your browser — **no tracking, no data collection**. |
 | 🎨 **Neumorphic UI** | Clean, modern and soft UI design for easy control and smooth experience. |
 </div>
+
+---
 
 
 ## 🛠️ Installation Guide
@@ -55,6 +58,7 @@ After downloading → **Extract (Unzip)** the file.
 5.  Select the `coursera_extension` folder from the downloaded files.
 6.  Examples: `C:\Users\...\Coursera-Automation\coursera_extension`
 ```
+
 ## 🚀 Usage
 
 1.  Open any Coursera course item (Video or Reading).
@@ -65,12 +69,14 @@ After downloading → **Extract (Unzip)** the file.
     - Mark the reading as read.
     - Go to the next item automatically.
 
+---
+
 ## ⚙️ Configuration
 
 - **Start/Stop**: Use the toggle button in the popup to pause automation at any time.
 - **About**: Click the "About Developer" button to see credits and links.
 
-## � Privacy & Security
+## 🔒 Privacy & Security
 
 We take your privacy seriously.
 - **Local Execution**: All code runs locally on your machine.
@@ -94,7 +100,7 @@ We take your privacy seriously.
 **Issue: Extension icon is missing or gray**
 - **Fix**: Go to `chrome://extensions`, toggle Developer Mode off and on, then reload the extension.
 
-## �👨‍💻 Developer
+## 👨‍💻 Developer
 <div align="center">
 
 **Priyanshu Gupta**
@@ -105,6 +111,7 @@ We take your privacy seriously.
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/priyanshu-gupta-dev)
 [![YouTube](https://img.shields.io/badge/Subscribe-FF0000?style=for-the-badge&logo=youtube)](https://www.youtube.com/@Code2Tech_404)
 </div>
+
 
 ## ⚠️ Disclaimer
 
