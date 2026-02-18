@@ -2,7 +2,7 @@
   
 # 💡 Coursera Automation Extension
 ![Platform](https://img.shields.io/badge/platform-Chrome-yellow.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)
 
 ![Stars](https://img.shields.io/github/stars/Priyanshu-Gupta-9165/Coursera-Automation?style=social)
 ![Forks](https://img.shields.io/github/forks/Priyanshu-Gupta-9165/Coursera-Automation?style=social)
@@ -39,7 +39,9 @@
 | Feature | Description |
 |:---:|:---|
 | ⚡**Instant Video Completion** | Detects active videos and jumps them to the end automatically — course video marked as completed. |
-| 📖 **Auto-Reading Mode** | Scans reading pages, scrolls to the bottom, and clicks **"Mark as Complete"** for you. |
+| 📖 **Complete Reading Mode** | Dedicated button to scan reading pages, scroll to bottom, and click **"Mark as Complete"**. |
+| 🛡 **Smart Safety** | Automatically stops automation before entering **Graded Assessments** or **Quizzes** to prevent accidents. |
+| 🔄 **Update Notifier** | Automatically checks for new versions on GitHub and alerts you when an update is available. |
 | ⏭️ **Smart Navigation** | Automatically presses the **Next** button so you can progress without manual clicks. |
 | 🔒 **100% Private & Safe** | Everything runs locally inside your browser — **no tracking, no data collection**. |
 | 🎨 **Neumorphic UI** | Clean, modern and soft UI design for easy control and smooth experience. |
@@ -71,11 +73,13 @@ After downloading → **Extract (Unzip)** the file.
 
 1.  Open any Coursera course item (Video or Reading).
 2.  Click the **Extension Icon** (Lightbulb 💡) in your toolbar.
-3.  Click **Start Automation ⚡**.
-4.  Sit back and watch the magic! The extension will:
+3.  **For Videos**: Click **Start Automation ⚡**.
+4.  **For Readings**: Click **Complete Reading 📖**.
+5.  Sit back and watch the magic! The extension will:
     - Skip the current video.
     - Mark the reading as read.
     - Go to the next item automatically.
+    - **Note**: It will STOP automatically if it detects a Graded Assessment.
 
 ---
 
