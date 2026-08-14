@@ -316,9 +316,11 @@ p, li {
     transition: color 0.2s ease, transform 0.2s ease;
 }
 .dev-link:hover { 
-    color: var(--primary); 
     transform: translateY(-1px);
 }
+.github-link:hover { color: #333; }
+.linkedin-link:hover { color: #0077b5; }
+.youtube-link:hover { color: #ff0000; }
 
 /* Steps */
 .update-step {
