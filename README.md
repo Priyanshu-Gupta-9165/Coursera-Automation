@@ -2,7 +2,7 @@
   
 # 💡 Coursera Automation Extension
 ![Platform](https://img.shields.io/badge/platform-Chrome-yellow.svg)
-![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)
 
 ![Stars](https://img.shields.io/github/stars/Priyanshu-Gupta-9165/Coursera-Automation?style=social)
 ![Forks](https://img.shields.io/github/forks/Priyanshu-Gupta-9165/Coursera-Automation?style=social)
@@ -19,7 +19,7 @@
 
 **A powerful Chrome extension to automate Coursera tasks — skip videos, complete readings, and more!**
 
-*Beautiful neumorphic UI • 100% Private • Zero data collection*
+*Beautiful neumorphic UI • Dark Mode • 100% Private • Zero data collection*
 </div>
 
 ---
@@ -33,6 +33,18 @@
 
 ---
 
+## 🚀 What's New in v1.3.0
+
+| Feature | Description |
+|:---:|:---|
+| 🌙 **Dark Mode** | Toggle between light and dark themes in the popup — preference saved automatically. |
+| 📊 **Session Stats** | Track how many videos and readings were auto-completed right in the popup. |
+| 🔔 **Toast Notifications** | On-page animated toasts when videos/readings are completed or automation starts/stops. |
+| ✅ **Auto-Stop** | Automation stops automatically when all module items are completed — no more running forever. |
+| 🧹 **Code Polish** | Cleaner codebase with external CSS, CSS variables, and proper class-based styling. |
+
+---
+
 ## ✨ **Features**
 <div align="center">
   
@@ -43,6 +55,10 @@
 | 🛡 **Smart Safety** | Automatically stops automation before entering **Graded Assessments** or **Quizzes** to prevent accidents. |
 | 🔄 **Update Notifier** | Automatically checks for new versions on GitHub and alerts you when an update is available. |
 | ⏭️ **Smart Navigation** | Automatically presses the **Next** button so you can progress without manual clicks. |
+| ✅ **Auto-Stop on Completion** | Detects when all items are done and automatically stops — shows a 🎉 completion banner. |
+| 🌙 **Dark Mode** | Eye-friendly dark theme for the popup — toggle with one click, preference saved across sessions. |
+| 📊 **Session Stats** | See how many videos and readings were completed in the current session. |
+| 🔔 **Toast Notifications** | Animated on-page toasts for real-time feedback on automation actions. |
 | 🔒 **100% Private & Safe** | Everything runs locally inside your browser — **no tracking, no data collection**. |
 | 🎨 **Neumorphic UI** | Clean, modern and soft UI design for easy control and smooth experience. |
 </div>
@@ -79,13 +95,18 @@ After downloading → **Extract (Unzip)** the file.
     - Skip the current video.
     - Mark the reading as read.
     - Go to the next item automatically.
-    - **Note**: It will STOP automatically if it detects a Graded Assessment.
+    - **Auto-Stop**: Automatically stops when all items are completed 🎉
+    - **Safety Stop**: Stops immediately if it detects a Graded Assessment.
+6.  **Dark Mode**: Click the 🌙 icon in the popup to toggle dark theme.
+7.  **Session Stats**: Check how many videos/readings were completed in the popup.
 
 ---
 
 ## ⚙️ Configuration
 
 - **Start/Stop**: Use the toggle button in the popup to pause automation at any time.
+- **Dark Mode**: Click the 🌙/☀️ toggle in the top-right corner of the popup.
+- **Stats**: Videos and readings completed are tracked and displayed in the popup.
 - **About**: Click the "About Developer" button to see credits and links.
 
 ---
@@ -106,7 +127,7 @@ After downloading → **Extract (Unzip)** the file.
 
 ## ⚠️ Disclaimer
 
-This tool is for **educational purposes only**. Using automation tools on Coursera may violate their Terms of Service. Use responsibly and at your own risk.
+This tool is for **educational purposes only**. It is intended to demonstrate browser automation concepts and is not meant to encourage any misuse or violation of platform policies. Use responsibly and at your own risk.
 
 ---
 

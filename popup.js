@@ -3,8 +3,39 @@ document.addEventListener('DOMContentLoaded', function () {
     const readingBtn = document.getElementById('readingBtn');
     const stopBtn = document.getElementById('stopBtn');
     const statusSpan = document.getElementById('status');
+    const themeToggle = document.getElementById('themeToggle');
+    const videoCountEl = document.getElementById('videoCount');
+    const readingCountEl = document.getElementById('readingCount');
 
-    // Load saved state
+    // --- Dark Mode ---
+    chrome.storage.local.get(['darkMode'], function (result) {
+        if (result.darkMode) {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+    });
+
+    themeToggle.addEventListener('click', function () {
+        const isDark = document.body.classList.toggle('dark-mode');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+        chrome.storage.local.set({ darkMode: isDark });
+    });
+
+    // --- Session Stats ---
+    function updateStats() {
+        chrome.storage.local.get(['videosCompleted', 'readingsCompleted'], function (result) {
+            videoCountEl.textContent = result.videosCompleted || 0;
+            readingCountEl.textContent = result.readingsCompleted || 0;
+        });
+    }
+    updateStats();
+
+    // Refresh stats when popup regains focus (in case content script updated counts)
+    document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) updateStats();
+    });
+
+    // --- Load saved state ---
     chrome.storage.local.get(['isRunning', 'mode'], function (result) {
         if (result.isRunning) {
             setRunningState(true, result.mode || 'video');
@@ -52,15 +83,48 @@ document.addEventListener('DOMContentLoaded', function () {
             readingBtn.style.display = 'block';
             stopBtn.style.display = 'none';
             statusSpan.textContent = 'Idle ☾';
-            statusSpan.style.color = '#666';
+            statusSpan.style.color = '';
         }
     }
 
+    // --- FIX #3: Proper error handling for sendMessage ---
     function sendMessageToContentScript(message) {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            if (tabs[0]) {
-                chrome.tabs.sendMessage(tabs[0].id, message);
+            if (!tabs || tabs.length === 0) {
+                console.warn("[Coursera Auto Popup] No active tab found.");
+                return;
             }
+
+            const tab = tabs[0];
+
+            // Only send to Coursera pages
+            if (!tab.url || !tab.url.includes("coursera.org")) {
+                console.warn("[Coursera Auto Popup] Not on a Coursera page. Open a Coursera course first.");
+                statusSpan.textContent = "⚠️ Open Coursera first!";
+                statusSpan.style.color = "#e67e22";
+                return;
+            }
+
+            chrome.tabs.sendMessage(tab.id, message, function (response) {
+                // Handle case where content script isn't injected yet
+                if (chrome.runtime.lastError) {
+                    console.warn("[Coursera Auto Popup] Content script not ready:", chrome.runtime.lastError.message);
+                    // Try injecting the content script programmatically
+                    chrome.scripting.executeScript({
+                        target: { tabId: tab.id },
+                        files: ["content.js"]
+                    }, function () {
+                        if (chrome.runtime.lastError) {
+                            console.error("[Coursera Auto Popup] Script injection failed:", chrome.runtime.lastError.message);
+                            return;
+                        }
+                        // Retry message after injection
+                        setTimeout(() => {
+                            chrome.tabs.sendMessage(tab.id, message);
+                        }, 500);
+                    });
+                }
+            });
         });
     }
 });
