@@ -7,17 +7,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const videoCountEl = document.getElementById('videoCount');
     const readingCountEl = document.getElementById('readingCount');
 
-    // --- Dark Mode ---
+    // --- Dark Mode (Fancy Toggle — checkbox) ---
     chrome.storage.local.get(['darkMode'], function (result) {
         if (result.darkMode) {
             document.body.classList.add('dark-mode');
-            themeToggle.textContent = '☀️';
+            themeToggle.checked = true;
         }
     });
 
-    themeToggle.addEventListener('click', function () {
-        const isDark = document.body.classList.toggle('dark-mode');
-        themeToggle.textContent = isDark ? '☀️' : '🌙';
+    themeToggle.addEventListener('change', function () {
+        const isDark = themeToggle.checked;
+        document.body.classList.toggle('dark-mode', isDark);
         chrome.storage.local.set({ darkMode: isDark });
     });
 

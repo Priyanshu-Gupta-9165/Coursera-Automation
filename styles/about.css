@@ -98,30 +98,213 @@ p, li {
     transform: translateY(1px);
 }
 
-/* Developer Profile */
-.developer-profile {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+/* ==============================
+   About Page Disclaimer (Deep)
+   ============================== */
+.about-disclaimer {
+    margin-top: 20px;
+    padding: 20px 22px;
+    background: linear-gradient(145deg, #fff8e1, #fff3cd);
+    border-left: 5px solid #ffc107;
+    border-radius: 14px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        6px 6px 14px rgba(163, 177, 198, 0.6),
+        -6px -6px 14px rgba(255, 255, 255, 0.8),
+        inset 0 2px 6px rgba(255, 193, 7, 0.15);
 }
-.dev-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--bg-color);
-    box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+
+.about-disclaimer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ffc107, #ff9800, #ffc107);
+}
+
+.disclaimer-icon {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.disclaimer-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #7a6200;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.about-disclaimer p {
+    font-size: 12.5px;
+    color: #856404;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==============================
+   Fancy Developer Name Card
+   ============================== */
+.dev-name-card {
+    --card-color: #b5faff31;
+    --name-txt-color: #283a3b;
+    --name-txt-color-2: #0056d2;
+    --corner-size: 7px;
+    --corner-color: #ffffff;
+    --line-color: #00000015;
+    --anim-speed: 0.8s;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    min-height: 44px;
+    user-select: none;
+    margin-bottom: 15px;
+}
+
+.name-btn {
+    filter: drop-shadow(0 4px 2px #00000030) drop-shadow(0 8px 4px #00000020);
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    color: var(--primary);
-    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    border-radius: 0;
+    font-weight: normal;
+    font-size: inherit;
 }
 
+.name-frame {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border: solid 1px var(--line-color);
+    background-color: var(--card-color);
+    box-shadow: inset 0 1px 4px 1px #fff5;
+    animation: nameFrameHalf calc(var(--anim-speed) * 0.5) forwards;
+}
+
+.corner {
+    position: absolute;
+    box-sizing: border-box;
+    width: var(--corner-size);
+    aspect-ratio: 1;
+    border-radius: 25%;
+    border: solid 1px var(--line-color);
+    background-color: var(--corner-color);
+    background-image: radial-gradient(circle at 50% 120%, #0005, #ffff);
+}
+.corner.top { top: calc(var(--corner-size) * -0.5); }
+.corner.bottom { bottom: calc(var(--corner-size) * -0.5); }
+.corner.left { left: calc(var(--corner-size) * -0.5); }
+.corner.right { right: calc(var(--corner-size) * -0.5); }
+
+.name-txt-box {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    text-wrap: nowrap;
+    inset: 0;
+    overflow: clip;
+    z-index: 2;
+    will-change: filter;
+    transition: filter 0.25s ease;
+    animation: nameFrameHalf calc(var(--anim-speed) * 0.5) forwards;
+}
+
+.name-txt-box::after {
+    content: "";
+    position: absolute;
+    inset: var(--corner-size);
+    background: repeating-linear-gradient(45deg, #3f87a6, #ebf8e1 15%, #fff 20%);
+    mix-blend-mode: hard-light;
+    background-size: 440%;
+    transition: background-size 0.4s ease-in;
+    filter: blur(1px);
+    z-index: 3;
+    opacity: 0.1;
+}
+
+.name-txt {
+    position: absolute;
+    padding: 0.6rem 1.5rem;
+    z-index: 2;
+    font: 600 1.1em 'Inter', sans-serif;
+    color: var(--name-txt-color);
+    text-shadow: 0 -1px 1px #ffffff60, 0 2px 1px #00000015;
+}
+.name-txt:last-child {
+    color: var(--name-txt-color-2);
+    opacity: 0;
+    animation: none;
+}
+
+.name-hint {
+    font: 400 0.7em 'Inter', sans-serif;
+    color: #0006;
+    font-style: italic;
+    transition: opacity calc(var(--anim-speed) * 0.5) ease;
+    margin-top: 6px;
+}
+#nameHint2 { opacity: 0; position: absolute; bottom: 0; }
+
+/* Hover animations */
+.name-btn:hover .name-txt {
+    animation: nameTxtOut calc(var(--anim-speed) * 0.5) forwards;
+}
+.name-btn:hover .name-txt:last-child {
+    animation: nameTxtIn calc(var(--anim-speed) * 0.5) forwards;
+}
+.name-btn:hover .name-txt-box {
+    animation: nameFrame var(--anim-speed) ease;
+}
+.name-btn:hover .name-txt-box::after {
+    background-size: 700%;
+}
+.name-btn:hover .name-frame {
+    animation: nameFrame var(--anim-speed) ease;
+}
+.name-btn:hover ~ #nameHint1 { opacity: 0; }
+.name-btn:hover ~ #nameHint2 { opacity: 1; }
+
+.name-btn:active .name-txt-box {
+    filter: contrast(1.4) brightness(1.4);
+}
+
+@keyframes nameTxtIn {
+    90% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes nameTxtOut {
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes nameFrameHalf {
+    0% { inset: 0 50%; }
+    100% { inset: 0 0%; }
+}
+@keyframes nameFrame {
+    50% { inset: 0 50%; }
+}
+
+/* Developer Links */
 .dev-links {
     display: flex;
     gap: 10px;
     margin-top: 8px;
+    justify-content: center;
 }
 .dev-link {
     color: #666;
@@ -130,8 +313,12 @@ p, li {
     align-items: center;
     gap: 4px;
     font-size: 11px;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
-.dev-link:hover { color: var(--primary); }
+.dev-link:hover { 
+    color: var(--primary); 
+    transform: translateY(-1px);
+}
 
 /* Steps */
 .update-step {
