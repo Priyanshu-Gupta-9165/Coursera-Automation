@@ -63,13 +63,43 @@ function showToast(message, type = 'info') {
     toast.onclick = () => toast.remove();
 }
 
-// --- Session Stats Helper ---
+// --- Session Stats & Progress Helper ---
 function incrementStat(key) {
     chrome.storage.local.get([key], function (result) {
         const current = result[key] || 0;
         chrome.storage.local.set({ [key]: current + 1 });
     });
 }
+
+// Scrape course progress from the left sidebar
+function scrapeProgress() {
+    // Look for progress indicators. Coursera often uses aria-valuenow or specific text
+    const progressBars = document.querySelectorAll('[aria-valuenow]');
+    for (const bar of progressBars) {
+        const val = parseInt(bar.getAttribute('aria-valuenow'), 10);
+        if (!isNaN(val) && val >= 0 && val <= 100) {
+            chrome.storage.local.set({ courseProgress: val });
+            return;
+        }
+    }
+    
+    // Fallback: look for text like "X% completed"
+    const textNodes = Array.from(document.querySelectorAll('span, p, div')).filter(el => {
+        const text = el.innerText || '';
+        return text.includes('% completed') || text.includes('% complete');
+    });
+    
+    for (const node of textNodes) {
+        const match = node.innerText.match(/(\d+)%/);
+        if (match && match[1]) {
+            chrome.storage.local.set({ courseProgress: parseInt(match[1], 10) });
+            return;
+        }
+    }
+}
+// Run progress scraper occasionally
+setInterval(scrapeProgress, 5000);
+setTimeout(scrapeProgress, 1500);
 
 let currentMode = 'video'; // 'video' or 'reading'
 

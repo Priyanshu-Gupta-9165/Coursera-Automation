@@ -1,356 +1,1192 @@
-/* ===========================
-   Coursera Auto — Popup Styles
-   =========================== */
+/* ═══════════════════════════════════════════════════════════════
+   Coursera Auto — Extension Popup Stylesheet
+   (Modern Diffuse Gradient Spread + iOS Glass 3D Depth Style)
+   Har line ke samne Hinglish comments ke sath
+═══════════════════════════════════════════════════════════════ */
 
-/* --- Light Mode Variables (Default) --- */
+/* ── 1. Google Font Import (Inter font load kar rahe hain) ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ── 2. Design Tokens / Global Variables (Pure popup ke colors aur styling values) ── */
 :root {
-    --popup-bg: #f0f2f5;
-    --popup-text: #333;
-    --card-bg: #ffffff;
-    --card-shadow: rgba(0, 0, 0, 0.1);
-    --border-color: #ddd;
-    --footer-color: #888;
-    --status-color: #666;
-    --heading-color: #0056D2;
-    --disclaimer-bg: linear-gradient(135deg, #fff3cd, #ffeeba);
-    --disclaimer-border: #ffc107;
-    --disclaimer-text: #856404;
+    --c-text: #0B1729;
+    /* Main text ka dark color */
+    --c-sub: #344054;
+    /* Secondary/sub-text ka color */
+    --c-muted: #667085;
+    /* Light muted text color */
+    --c-micro: #8B95A5;
+    /* Chote labels ka light color */
+    --c-bdr: rgba(215, 223, 237, 0.8);
+    /* Card ki main border ka color */
+    --c-bdr-l: rgba(228, 233, 242, 0.7);
+    /* Card ki light border ka color */
+    --c-green: #35B84A;
+    /* Green color (success ya active ke liye) */
+    --c-green-dk: #087520;
+    /* Dark green color text ke liye */
+    --c-red: #C53030;
+    /* Red color (stop button ya warning ke liye) */
+    --c-purple: #6D24F5;
+    /* Purple color developer card ke liye */
+    --r: 16px;
+    /* iOS style smooth rounded corners */
+    --s-3d: 0 4px 16px rgba(30, 50, 90, 0.05), 0 1px 3px rgba(30, 50, 90, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(0, 0, 0, 0.02);
+    /* iOS real 3D depth shadow */
 }
 
-/* --- Dark Mode Variables --- */
-body.dark-mode {
-    --popup-bg: #1a1a2e;
-    --popup-text: #e0e0e0;
-    --card-bg: #16213e;
-    --card-shadow: rgba(0, 0, 0, 0.35);
-    --border-color: #2a2a4a;
-    --footer-color: #7a7a9a;
-    --status-color: #a0a0c0;
-    --heading-color: #4d9aff;
-    --disclaimer-bg: linear-gradient(135deg, #3a2e00, #2e2400);
-    --disclaimer-border: #b8860b;
-    --disclaimer-text: #f0d060;
+/* ── 3. Reset & Box Sizing (Sabhi elements ka default margin/padding hatane ke liye) ── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    /* Padding aur border ko total width/height ke andar include karta hai */
+    margin: 0;
+    /* Default bahar ka space zero karta hai */
+    padding: 0;
+    /* Default andar ka space zero karta hai */
 }
 
-/* --- Base Styles --- */
+/* ── 4. Main HTML & Body Layout (Extension Popup window ka size aur font) ── */
+html,
 body {
-    width: 250px;
-    padding: 15px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--popup-bg);
-    color: var(--popup-text);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 390px;
+    /* Popup ki total width */
+    height: 750px;
+    /* Popup ki total height */
+    margin: 0;
+    /* Outer margin zero */
+    padding: 0;
+    /* Inner padding zero */
+    background: #F4F6F9;
+    /* Subtle modern background color */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* Clean font family */
+    -webkit-font-smoothing: antialiased;
+    /* Text ko smooth aur clear render karta hai */
+    overflow: hidden;
+    /* Scrollbar chupane ke liye (zero scroll popup) */
+    border-radius: 20px;
+    /* Window corners rounded */
 }
 
-/* --- Header --- */
-.popup-header {
-    text-align: center;
-    position: relative;
-}
-
-.popup-header img {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 5px;
-}
-
-h2 {
-    margin-top: 0;
-    font-size: 18px;
-    color: var(--heading-color);
-    text-align: center;
-    transition: color 0.3s ease;
-}
-
-/* ==============================
-   Fancy Dark Mode Toggle
-   (Adapted from Uiverse.io by MuhammadHasann)
-   ============================== */
-.toggle-cont {
-    --primary: #54a8fc;
-    --light: #d9d9d9;
-    --dark: #121212;
-    --gray: #414344;
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 10;
-    width: fit-content;
-    height: 28px;
-    border-radius: 9999px;
-}
-
-.toggle-cont .toggle-input {
-    display: none;
-}
-
-.toggle-cont .toggle-label {
-    --gap: 3px;
-    --width: 28px;
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    padding: 3px;
-    width: calc((var(--width) + var(--gap)) * 2);
-    height: 100%;
-    background-color: var(--dark);
-    border: 1px solid #777777;
-    border-bottom: 0;
-    border-radius: 9999px;
-    box-sizing: content-box;
-    transition: all 0.3s ease-in-out;
-}
-
-.toggle-label::before {
-    content: "";
-    position: absolute;
-    z-index: -10;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(100% + 0.8rem);
-    height: calc(100% + 0.8rem);
-    background-color: var(--gray);
-    border: 1px solid #777777;
-    border-bottom: 0;
-    border-radius: 9999px;
-    transition: all 0.3s ease-in-out;
-}
-
-.toggle-label::after {
-    content: "";
-    position: absolute;
-    z-index: -10;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(
-        circle at 50% -100%,
-        rgb(58, 155, 252) 0%,
-        rgba(12, 12, 12, 1) 80%
-    );
-    border-radius: 9999px;
-}
-
-.toggle-cont .toggle-label .cont-icon {
-    position: relative;
+/* ── 5. App Container Wrapper (Glassy iOS style main container) ── */
+.app-container {
+    width: 390px;
+    /* Container ki fixed width */
+    height: auto;
+    /* Content ke hisaab se height auto */
+    background: rgba(248, 249, 252, 0.90);
+    /* Glassy translucent background */
+    backdrop-filter: blur(20px);
+    /* iOS background blur effect */
+    -webkit-backdrop-filter: blur(20px);
+    /* Safari/Chrome webkit blur */
+    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    /* Glassy white border highlight */
+    border-radius: 20px;
+    /* Corner ko gol (rounded) banane ke liye */
+    padding: 4px 12px 6px;
+    /* Top 4px, Left-Right 12px, Bottom 6px padding */
     display: flex;
+    /* Flexbox layout activate karta hai */
+    flex-direction: column;
+    /* Items ko vertically ek ke niche ek lagata hai */
+    gap: 6px;
+    /* Har section ke beech 6px ka gap */
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), inset 0 1px 1.5px rgba(255, 255, 255, 1);
+    /* iOS 3D elevation depth */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 1: HERO (Logo & Branding Header)
+═══════════════════════════════════════════════════════════════ */
+
+.hero {
+    width: 100%;
+    /* Poori width cover karega */
+    display: flex;
+    /* Flexbox alignment ke liye */
     justify-content: center;
-    align-items: center;
-    width: var(--width);
-    height: 28px;
-    background-image: radial-gradient(
-        circle at 50% 0%,
-        #666666 0%,
-        var(--gray) 100%
-    );
-    border: 1px solid #aaaaaa;
-    border-bottom: 0;
-    border-radius: 9999px;
-    box-shadow: inset 0 -0.1rem 0.1rem var(--primary),
-        inset 0 0 0.3rem 0.5rem var(--second);
-    transition: transform 0.3s ease-in-out;
-    overflow: clip;
+    /* Image ko horizontally center mein rakhega */
+    padding: 2px 0 0;
+    /* Upar se 2px ka space */
 }
 
-.cont-icon .sparkle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+.hero-image {
+    width: 280px;
+    /* Hero image ki width */
+    height: auto;
+    /* Height aspect ratio ke hisaab se auto adjust hogi */
     display: block;
-    width: calc(var(--width) * 1px);
-    aspect-ratio: 1;
-    background-color: var(--light);
-    border-radius: 50%;
-    transform-origin: 50% 50%;
-    rotate: calc(1deg * var(--deg));
-    transform: translate(-50%, -50%);
-    animation: sparkle calc(100s / var(--duration)) linear
-        calc(0s / var(--duration)) infinite;
+    /* Image ko block element banata hai */
+    object-fit: contain;
+    /* Image stretch na ho, proportion maintain rahe */
+    mix-blend-mode: darken;
+    /* White background blend ho jata hai */
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.04));
+    /* Image par halki 3D soft shadow */
 }
 
-@keyframes sparkle {
-    to {
-        width: calc(var(--width) * 0.5px);
-        transform: translate(2000%, -50%);
-    }
-}
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 2: STATUS CARD (Modern Spread Gradient & Free Icons)
+═══════════════════════════════════════════════════════════════ */
 
-.cont-icon .toggle-icon {
-    width: 0.7rem;
-    fill: var(--light);
-}
-
-/* Checked state */
-.toggle-cont:has(.toggle-input:checked) .toggle-label {
-    background-color: #41434400;
-    border: 1px solid #3d6970;
-    border-bottom: 0;
-}
-
-.toggle-cont:has(.toggle-input:checked) .toggle-label::before {
-    box-shadow: 0 0.5rem 1.5rem -1rem #0080ff;
-}
-
-.toggle-cont:has(.toggle-input:checked) .toggle-label .cont-icon {
-    overflow: visible;
-    background-image: radial-gradient(
-        circle at 50% 0%,
-        #045ab1 0%,
-        var(--primary) 100%
-    );
-    border: 1px solid var(--primary);
-    border-bottom: 0;
-    transform: translateX(calc((var(--gap) * 2) + 100%)) rotate(-225deg);
-}
-
-.toggle-cont:has(.toggle-input:checked) .toggle-label .cont-icon .sparkle {
-    z-index: -10;
-    width: calc(var(--width) * 1.5px);
-    background-color: #acacac;
-    animation: sparkleChecked calc(100s / var(--duration)) linear
-        calc(10s / var(--duration)) infinite;
-}
-
-@keyframes sparkleChecked {
-    to {
-        width: calc(var(--width) * 1px);
-        transform: translate(5000%, -50%);
-    }
-}
-
-/* --- Status Box --- */
-.status-box {
-    background: var(--card-bg);
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px var(--card-shadow);
-    margin-bottom: 15px;
-    text-align: center;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-#status {
-    font-weight: bold;
-    color: var(--status-color);
-    transition: color 0.3s ease;
-}
-
-/* --- Session Stats --- */
-.session-stats {
+.status-card {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 15px;
-    gap: 8px;
-}
-
-.stat-item {
-    background: var(--card-bg);
-    border-radius: 8px;
-    padding: 8px 10px;
-    text-align: center;
-    flex: 1;
-    box-shadow: 0 1px 3px var(--card-shadow);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.stat-value {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--heading-color);
-    display: block;
-    transition: color 0.3s ease;
-}
-
-.stat-label {
-    font-size: 10px;
-    color: var(--footer-color);
-    display: block;
-    margin-top: 2px;
-    transition: color 0.3s ease;
-}
-
-/* --- Buttons --- */
-button {
+    /* Left aur right status ko side-by-side rakhta hai */
+    align-items: center;
+    /* Vertically center align karta hai */
     width: 100%;
-    padding: 10px;
+    /* Card full width lega */
+    padding: 7px 14px;
+    /* Top-bottom 7px, left-right 14px padding */
+    border-radius: var(--r);
+    /* 16px iOS rounded corners */
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    /* Top glassy border */
+    border-bottom: 1.5px solid rgba(215, 223, 237, 0.7);
+    /* Bottom 3D bevel edge */
+    background: radial-gradient(circle at 10% 20%, rgba(53, 184, 74, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(109, 36, 245, 0.08) 0%, transparent 45%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 250, 255, 0.78) 100%);
+    /* Modern diffused spread gradient */
+    backdrop-filter: blur(16px);
+    /* Glassy frosted blur */
+    -webkit-backdrop-filter: blur(16px);
+    /* Webkit blur */
+    box-shadow: var(--s-3d);
+    /* 3D layered elevation */
+}
+
+.status-half {
+    flex: 1;
+    /* Dono status column barabar space lete hain */
+    display: flex;
+    /* Icon aur text ko row mein set karta hai */
+    align-items: center;
+    /* Vertically center align */
+    gap: 8px;
+    /* Icon aur text ke beech 8px space */
+}
+
+.status-divider {
+    width: 1px;
+    /* Beech ki vertical line ki motai */
+    height: 24px;
+    /* Line ki height */
+    background: linear-gradient(to bottom, transparent, rgba(213, 220, 232, 0.8), transparent);
+    /* Smooth fading 3D divider */
+    margin: 0 6px;
+    /* Left-right mein 6px margin */
+    flex-shrink: 0;
+    /* Space kam hone par line shrink nahi hogi */
+}
+
+/* Free floating icon container without box border/background */
+.status-icon-box {
+    background: none;
+    /* Box background hataya gaya hai */
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-    transition: all 0.2s ease;
+    /* Box border hatayi gayi hai */
+    box-shadow: none;
+    /* Box shadow hatayi gayi hai */
+    width: auto;
+    /* Auto width */
+    height: auto;
+    /* Auto height */
+    display: flex;
+    /* Flex container */
+    align-items: center;
+    /* Vertically center */
+    justify-content: center;
+    /* Horizontally center */
+    flex-shrink: 0;
+    /* Size shrink nahi hoga */
 }
 
-#startBtn {
-    background-color: #28a745;
-    color: white;
+.status-icon {
+    width: 22px;
+    /* Icon ki crisp width */
+    height: 22px;
+    /* Icon ki height */
+    object-fit: contain;
+    /* Icon stretch nahi hoga */
+    filter: drop-shadow(0 2px 4px rgba(11, 23, 41, 0.12));
+    /* Icon par realistic 3D depth shadow */
 }
 
-#startBtn:hover {
-    background-color: #218838;
+.status-text {
+    display: flex;
+    /* Text lines ke liye flexbox */
+    flex-direction: column;
+    /* Label upar, value niche */
+    gap: 1px;
+    /* Lines ke beech 1px gap */
 }
 
-#readingBtn {
-    background-color: #0056D2;
-    color: white;
-    margin-top: 10px;
+.status-label {
+    font-size: 7.5px;
+    /* Label font size */
+    font-weight: 700;
+    /* Bold text */
+    letter-spacing: 0.8px;
+    /* Letters ke beech halka space */
+    color: var(--c-micro);
+    /* Light grey micro color */
+    text-transform: uppercase;
+    /* Text ko capital letters mein convert karta hai */
 }
 
-#readingBtn:hover {
-    background-color: #004ab5;
-}
-
-#stopBtn {
-    background-color: #dc3545;
-    color: white;
-    display: none;
-}
-
-#stopBtn:hover {
-    background-color: #c82333;
-}
-
-/* --- About / Footer Section --- */
-.about-section {
-    margin-top: 15px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 10px;
-    transition: border-color 0.3s ease;
-}
-
-#aboutBtn {
-    background-color: #6c757d;
-    color: white;
+.status-value {
     font-size: 12px;
-    padding: 5px;
+    /* Value ka font size */
+    font-weight: 700;
+    /* Bold font */
+    color: var(--c-text);
+    /* Dark text color */
+    display: flex;
+    /* Dot aur text ek sath row mein */
+    align-items: center;
+    /* Vertically center align */
+    gap: 5px;
+    /* Dot aur text ke beech 5px space */
 }
 
-#aboutBtn:hover {
-    background-color: #5a6268;
+/* Status Indicator Dots */
+.status-dot {
+    width: 7px;
+    /* Dot ki width */
+    height: 7px;
+    /* Dot ki height */
+    border-radius: 50%;
+    /* Gol (circle) banane ke liye */
+    display: inline-block;
+    /* Inline block element */
+    flex-shrink: 0;
+    /* Size shrink nahi hoga */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    /* Dot par 3D shadow */
 }
 
-/* --- Disclaimer Banner --- */
-.disclaimer-banner {
-    margin-top: 12px;
-    padding: 8px 10px;
-    background: var(--disclaimer-bg);
-    border-left: 3px solid var(--disclaimer-border);
-    border-radius: 6px;
-    font-size: 10px;
-    color: var(--disclaimer-text);
-    text-align: center;
-    line-height: 1.4;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+.dot-idle {
+    background: var(--c-green);
+    /* Green color */
+    box-shadow: 0 0 0 2px rgba(53, 184, 74, 0.15), 0 1px 3px rgba(53, 184, 74, 0.3);
+    /* Green glow ring */
 }
 
-/* --- Footer --- */
-.footer {
-    margin-top: 10px;
+.dot-inactive {
+    background: #BEC5D1;
+    /* Grey color jab inactive ho */
+}
+
+.dot-active {
+    background: var(--c-green);
+    /* Active hone par green */
+    box-shadow: 0 0 0 2px rgba(53, 184, 74, 0.15), 0 1px 3px rgba(53, 184, 74, 0.3);
+    /* Green ring */
+}
+
+.dot-running {
+    background: var(--c-green);
+    /* Running green dot */
+    box-shadow: 0 0 6px rgba(53, 184, 74, 0.6);
+    /* Glowing shadow */
+    animation: pulse 1.5s ease-in-out infinite;
+    /* Dhadakne wala (pulsing) animation */
+}
+
+.dot-session {
+    background: var(--c-green);
+    /* Session ka chota green dot */
+    width: 5px;
+    /* Width 5px */
+    height: 5px;
+    /* Height 5px */
+}
+
+/* Pulse animation for running dot */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        /* Full opacity */
+        transform: scale(1);
+        /* Normal size */
+    }
+
+    50% {
+        opacity: 0.6;
+        /* Thoda transparent */
+        transform: scale(1.25);
+        /* 25% bada size */
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 3: STATS GRID (Videos Completed & Time Spent)
+   Modern Spread Ambient Aura Gradients
+═══════════════════════════════════════════════════════════════ */
+
+.stats-grid {
+    display: grid;
+    /* Grid layout */
+    grid-template-columns: 1fr 1fr;
+    /* 2 barabar columns (50% - 50%) */
+    gap: 6px;
+    /* Dono cards ke beech 6px gap */
+    width: 100%;
+    /* Full width */
+}
+
+
+
+.stat-card {
+    border-radius: var(--r);
+    /* 16px iOS rounded corners */
+    padding: 7px 10px 7px;
+    /* Card ki internal padding */
+    backdrop-filter: blur(16px);
+    /* Glassy blur */
+    -webkit-backdrop-filter: blur(16px);
+    /* Webkit blur */
+    display: flex;
+    /* Flex layout */
+    flex-direction: column;
+    /* Content upar se niche */
+    gap: 3px;
+    /* Elements ke beech 3px gap */
+    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+    /* iOS spring-like hover */
+}
+
+.stat-card:hover {
+    transform: translateY(-1.5px);
+    /* Hover par 1.5px smooth elevation */
+}
+
+/* Warm Card (Videos Completed) — Modern Warm Amber/Orange Diffused Spread Gradient */
+.card-warm {
+    background: radial-gradient(circle at 15% 15%, rgba(255, 140, 60, 0.18) 0%, transparent 55%),
+        radial-gradient(circle at 85% 90%, rgba(255, 200, 100, 0.12) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 248, 242, 0.78) 100%);
+    /* Modern warm diffuse spread aura */
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    /* Top white glass highlight */
+    border-bottom: 1.5px solid rgba(240, 200, 175, 0.85);
+    /* Bottom 3D warm edge */
+    box-shadow: 0 4px 16px rgba(255, 140, 50, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(200, 100, 50, 0.04);
+    /* 3D depth */
+}
+
+/* Cool Card (Time Spent) — Modern Blue/Violet Diffused Spread Gradient */
+.card-cool {
+    background: radial-gradient(circle at 15% 15%, rgba(56, 130, 255, 0.18) 0%, transparent 55%),
+        radial-gradient(circle at 85% 90%, rgba(147, 51, 234, 0.10) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(242, 247, 255, 0.78) 100%);
+    /* Modern cool blue diffuse spread aura */
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    /* Top white glass highlight */
+    border-bottom: 1.5px solid rgba(195, 215, 250, 0.85);
+    /* Bottom 3D cool edge */
+    box-shadow: 0 4px 16px rgba(56, 130, 255, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(30, 80, 180, 0.04);
+    /* 3D depth */
+}
+
+.stat-top {
+    display: flex;
+    /* Top row mein icon aur label */
+    align-items: center;
+    /* Vertically center align */
+    gap: 6px;
+    /* Beech mein 6px gap */
+}
+
+/* 3D Glossy Icon Box with Depth, Shine and Soft Shadow */
+.stat-icon-box {
+    width: 50px;
+    /* 3D icon box width */
+    height: 50px;
+    /* 3D icon box height */
+    border-radius: 9px;
+    /* iOS squircle rounded corners */
+    display: flex;
+    /* Flex container */
+    align-items: center;
+    /* Vertically center icon */
+    justify-content: center;
+    /* Horizontally center icon */
+    flex-shrink: 0;
+    /* Shrink nahi hoga */
+    position: relative;
+    /* Shine highlight ke liye */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Hover interaction */
+}
+
+/* Warm 3D Icon Box (Videos Completed) — Amber / Orange Glossy 3D Box with Shine */
+.icon-warm {
+    background: linear-gradient(145deg, #FFFFFF 0%, #FFF3E6 45%, #FFE2C7 100%);
+    /* Glossy warm gradient with top white shine */
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    /* Top glassy white border reflection */
+    border-bottom: 1.5px solid #FFCCA0;
+    /* 3D bottom bevel edge */
+    box-shadow: 0 3px 8px rgba(255, 140, 50, 0.22), 0 1px 2px rgba(0, 0, 0, 0.04), inset 0 1px 1px #FFFFFF, inset 0 -1.5px 2px rgba(230, 110, 20, 0.12);
+    /* 3D depth + shine + soft shadow */
+}
+
+/* Cool 3D Icon Box (Time Spent) — Blue / Cyan Glossy 3D Box with Shine */
+.icon-cool {
+    background: linear-gradient(145deg, #FFFFFF 0%, #EEF4FF 45%, #DCE8FF 100%);
+    /* Glossy cool gradient with top white shine */
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    /* Top glassy white border reflection */
+    border-bottom: 1.5px solid #BED4FF;
+    /* 3D bottom bevel edge */
+    box-shadow: 0 3px 8px rgba(56, 130, 255, 0.22), 0 1px 2px rgba(0, 0, 0, 0.04), inset 0 1px 1px #FFFFFF, inset 0 -1.5px 2px rgba(30, 90, 220, 0.12);
+    /* 3D depth + shine + soft shadow */
+}
+
+.stat-icon-img {
+    width: 30px;
+    /* Icon image width */
+    height: 30px;
+    /* Icon image height */
+    object-fit: contain;
+    /* Stretch nahi hogi */
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.12));
+    /* Icon par 3D drop shadow */
+}
+
+.stat-labels {
+    display: flex;
+    /* Labels container */
+    flex-direction: column;
+    /* Header label stack */
+    flex: 1;
+    /* Bacha hua space le lega */
+    align-items: flex-end;
+}
+
+.stat-micro {
+
+    font-size: 8px;
+    /* Chota font size */
+    font-weight: 700;
+    /* Bold text */
+    letter-spacing: 0.7px;
+    /* Letters ke beech gap */
+    color: var(--c-micro);
+    /* Light grey color */
+    line-height: 1.15;
+    /* Line height spacing */
+    margin-top: -20px;  /* Moves the text up (adjust -6px to your liking) */
+    margin-bottom: 5;
+}
+
+/* Videos Completed Counter Value */
+.video-counter-value {
+    font-size: 30px;    
+    /* Bold clean counter number */
+    font-weight: 500;
+    /* Extra bold */
+    color: var(--c-text);
+    /* Dark text */
+    font-family: ClementFiveRegular, serif;
+    letter-spacing: -0.3px;
+    text-align: right;
+margin-top: -30px !important;
+margin-bottom: 0 !important;
+    /* Tight digital letter spacing */
+    font-variant-numeric: tabular-nums;
+    /* Numbers alignment fixed */
+    line-height: 1.1;
+    /* Line height */
+    margin: 1px 0;
+    /* Margin */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    /* 3D text shadow */
+}
+
+.video-pill {
+    display: inline-flex;
+    /* Pill badge layout */
+    align-items: center;
+    /* Dot aur text center mein */
+    gap: 4px;
+    /* 4px gap */
+    font-size: 7.5px;
+    /* Chota font size */
+    font-weight: 600;
+    /* Semi-bold */
+    color: #A05510;
+    /* Warm brown text */
+    background: rgba(255, 140, 50, 0.10);
+    /* Warm orange background tint */
+    border: 1px solid rgba(255, 140, 50, 0.22);
+    /* Orange border */
+    padding: 2px 7px;
+    /* Pill internal padding */
+    border-radius: 999px;
+    /* Capsule pill shape */
+    width: fit-content;
+    /* Fit content */
+    box-shadow: 0 1px 3px rgba(255, 140, 50, 0.08);
+    /* Pill 3D shadow */
+}
+
+/* Timer Display */
+.timer-value {
+    font-size: 18px;
+    /* Bada digital timer font size */
+    font-weight: 700;
+    /* Bold font */
+    color: var(--c-text);
+    /* Dark text */
+    letter-spacing: -0.2px;
+    /* Numbers ke beech tight space */
+    font-variant-numeric: tabular-nums;
+    /* Numbers ka width barabar rahega taaki timer hilta na dikhe */
+    line-height: 1.1;
+    /* Compact line height */
+    margin: 1px 0;
+    /* Top-bottom 1px margin */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    /* Subtle 3D text shadow */
+}
+
+.session-pill {
+    display: inline-flex;
+    /* Pill badge layout */
+    align-items: center;
+    /* Dot aur text center mein */
+    gap: 4px;
+    /* 4px gap */
+    font-size: 7.5px;
+    /* Chota font size */
+    font-weight: 600;
+    /* Semi-bold */
+    color: var(--c-sub);
+    /* Subtext color */
+    background: rgba(53, 184, 74, 0.08);
+    /* Light green background tint */
+    border: 1px solid rgba(53, 184, 74, 0.18);
+    /* Light green border */
+    padding: 2px 7px;
+    /* Pill ki internal padding */
+    border-radius: 999px;
+    /* Capsule/pill shape */
+    width: fit-content;
+    /* Text jitna hi size lega */
+    box-shadow: 0 1px 3px rgba(53, 184, 74, 0.08);
+    /* Pill 3D shadow */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 4: ACTION BUTTONS (Start, Stop & Mode Selection)
+═══════════════════════════════════════════════════════════════ */
+
+.cta-zone {
+    width: 100%;
+    /* Full width button zone */
+}
+
+.cta-btn {
+    display: flex;
+    /* Flex row layout */
+    align-items: center;
+    /* Content center aligned */
+    width: 100%;
+    /* Button full width lega */
+    padding: 7px 12px;
+    /* Button padding */
+    border-radius: var(--r);
+    /* 16px iOS rounded corners */
+    cursor: pointer;
+    /* Cursor pointer (hand) banega */
+    font-family: inherit;
+    /* App font inherit karega */
+    gap: 10px;
+    /* Elements ke beech 10px gap */
+    transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.18s ease;
+    /* Smooth 3D button press transition */
+}
+
+.cta-btn:hover {
+    transform: translateY(-1.5px);
+    /* Hover karne par button thoda upar uthega */
+}
+
+.cta-btn:active {
+    transform: translateY(1px) scale(0.99);
+    /* Click karne par button daba hua (3D tactile press) feel hoga */
+}
+
+.cta-btn:focus-visible {
+    outline: 3px solid rgba(48, 100, 255, 0.35);
+    /* Keyboard focus par blue outline */
+    outline-offset: 2px;
+    /* Outline aur button ke beech 2px gap */
+}
+
+/* Start Button Variant — Glassy + iOS 3D Depth */
+.cta-start {
+    background: radial-gradient(circle at 10% 20%, rgba(72, 214, 93, 0.22) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(240, 255, 242, 0.95) 0%, rgba(226, 252, 232, 0.82) 100%);
+    /* Glassy fresh green gradient with spread aura */
+    backdrop-filter: blur(16px);
+    /* Frosted glass blur */
+    -webkit-backdrop-filter: blur(16px);
+    /* Webkit blur */
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    /* Top white glass highlight */
+    border-bottom: 2px solid #58C965;
+    /* Bottom 3D green edge */
+    box-shadow: 0 5px 16px rgba(40, 170, 70, 0.14), 0 2px 4px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(30, 140, 50, 0.06);
+    /* iOS 3D depth */
+}
+
+/* Stop Button Variant — Glassy + iOS 3D Depth */
+.cta-stop {
+    background: radial-gradient(circle at 10% 20%, rgba(248, 114, 114, 0.22) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(255, 240, 240, 0.95) 0%, rgba(255, 228, 228, 0.82) 100%);
+    /* Glassy soft red gradient with spread aura */
+    backdrop-filter: blur(16px);
+    /* Frosted glass blur */
+    -webkit-backdrop-filter: blur(16px);
+    /* Webkit blur */
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    /* Top white glass highlight */
+    border-bottom: 2px solid #F08080;
+    /* Bottom 3D red edge */
+    box-shadow: 0 5px 16px rgba(220, 50, 50, 0.14), 0 2px 4px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(180, 30, 30, 0.06);
+    /* iOS 3D depth */
+}
+
+/* Button Icon Container (Box styling removed — icon stands free) */
+.cta-icon-wrap {
+    background: none !important;
+    /* Box background hataya gaya hai */
+    border: none !important;
+    /* Box border hatayi gayi hai */
+    box-shadow: none !important;
+    /* Box shadow hatayi gayi hai */
+    width: auto;
+    /* Auto width */
+    height: auto;
+    /* Auto height */
+    display: flex;
+    /* Flex layout */
+    align-items: center;
+    /* Center icon */
+    justify-content: center;
+    /* Center icon */
+    flex-shrink: 0;
+    /* Chota nahi hoga */
+}
+
+/* Button Gear Icon */
+.cta-gear {
+    width: 26px;
+    /* Gear icon width */
+    height: 26px;
+    /* Gear icon height */
+    object-fit: contain;
+    /* Proportion maintain rahega */
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.12));
+    /* Gear icon par 3D shadow */
+}
+
+.cta-start .cta-gear {
+    filter: invert(34%) sepia(85%) saturate(540%) hue-rotate(85deg) brightness(92%) contrast(98%) drop-shadow(0 2px 4px rgba(53, 184, 74, 0.3));
+    /* Green color + 3D drop shadow */
+}
+
+.cta-stop .cta-gear {
+    filter: invert(27%) sepia(85%) saturate(2200%) hue-rotate(345deg) brightness(95%) contrast(90%) drop-shadow(0 2px 4px rgba(220, 50, 50, 0.3));
+    /* Red color + 3D drop shadow */
+}
+
+.gear-spin {
+    animation: spin 2s linear infinite;
+    /* Gear ko ghumane (rotate karne) ke liye animation */
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+        /* 360 degree poora ghumega */
+    }
+}
+
+/* Button Text Block */
+.cta-copy {
+    flex: 1;
+    /* Text box bacha hua space lega */
+    display: flex;
+    /* Flex layout */
+    flex-direction: column;
+    /* Title upar, subtitle niche */
+    text-align: left;
+    /* Left aligned text */
+    gap: 0;
+    /* No gap */
+}
+
+.cta-title {
+    font-size: 14px;
+    /* Button title font size */
+    font-weight: 800;
+    /* Extra bold */
+    color: var(--c-green-dk);
+    /* Dark green color */
+}
+
+.cta-title-red {
+    color: var(--c-red);
+    /* Stop button title ka red color */
+}
+
+.cta-sub {
+    font-size: 8px;
+    /* Subtitle font size */
+    font-weight: 400;
+    /* Normal weight */
+    color: #5B7563;
+    /* Muted green text */
+}
+
+.cta-sub-red {
+    color: #9C5555;
+    /* Muted red text */
+}
+
+/* Button Action Arrow / Indicator with iOS 3D pill look */
+.cta-arrow {
+    width: 32px;
+    /* Arrow circle width */
+    height: 32px;
+    /* Arrow circle height */
+    border-radius: 50%;
+    /* Poora gol (circle) */
+    background: linear-gradient(145deg, #68D25D, #22A83C);
+    /* Bright green gradient */
+    display: grid;
+    /* Grid layout */
+    place-items: center;
+    /* Arrow ko perfect center mein rakhega */
+    flex-shrink: 0;
+    /* Size shrink nahi hoga */
+    box-shadow: 0 4px 10px rgba(35, 170, 60, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.8), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+    /* iOS 3D button depth */
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
+    /* White border ring */
+    transition: transform 0.2s ease;
+    /* Hover effect transition */
+}
+
+.cta-arrow svg {
+    width: 15px;
+    /* SVG arrow width */
+    height: 15px;
+    /* SVG arrow height */
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+    /* Arrow icon par shadow */
+}
+
+.cta-btn:hover .cta-arrow {
+    transform: translateX(3px);
+    /* Button hover par arrow 3px right move karega */
+}
+
+.cta-arrow-red {
+    background: linear-gradient(145deg, #F05050, #D32F2F);
+    /* Red gradient for stop button */
+    box-shadow: 0 4px 10px rgba(211, 47, 47, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.8), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+    /* Red 3D shadow */
+}
+
+/* Mode Selection Row (Video / Reading Mode buttons) — Glassy + 3D */
+.mode-row {
+    display: flex;
+    /* Buttons side-by-side */
+    gap: 6px;
+    /* Beech mein 6px space */
+    width: 100%;
+    /* Full width */
+}
+
+.mode-btn {
+    flex: 1;
+    /* Dono mode button barabar width lenge */
+    display: flex;
+    /* Flex layout */
+    align-items: center;
+    /* Icon aur text vertically center */
+    justify-content: center;
+    /* Horizontally center */
+    gap: 8px;
+    /* Icon aur text ke beech 8px gap */
+    background: radial-gradient(circle at 10% 20%, rgba(220, 235, 255, 0.4) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(245, 247, 252, 0.78) 100%);
+    /* Glass gradient */
+    backdrop-filter: blur(12px);
+    /* Blur effect */
+    -webkit-backdrop-filter: blur(12px);
+    /* Webkit blur */
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    /* Top glass border */
+    border-bottom: 1.5px solid #CBD5E1;
+    /* 3D bottom bevel edge */
+    border-radius: 12px;
+    /* iOS rounded corners */
+    padding: 8px 6px;
+    /* Button padding */
+    cursor: pointer;
+    /* Pointer cursor */
+    font-family: inherit;
+    /* Inherit font */
     font-size: 11px;
-    color: var(--footer-color);
-    text-align: center;
-    transition: color 0.3s ease;
+    /* 11px font size */
+    font-weight: 700;
+    /* Bold font */
+    color: var(--c-text);
+    /* Dark text color */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(255, 255, 255, 1);
+    /* iOS 3D button shadow */
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    /* Hover transition */
+}
+
+.mode-btn:hover {
+    transform: translateY(-1px);
+    /* Hover par 1px upar uthega */
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 1);
+    /* Hover shadow */
+}
+
+.mode-btn:active {
+    transform: translateY(1px);
+    /* Click karne par 3D press feel */
+}
+
+.mode-icon {
+    width: 20px;
+    /* Mode icon width */
+    height: 20px;
+    /* Mode icon height */
+    object-fit: contain;
+    /* Icon proportion maintain rahega */
+    filter: drop-shadow(0 1.5px 3px rgba(0, 0, 0, 0.1));
+    /* Icon par 3D drop shadow */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 5: WARNING CARD (Educational Purpose Notice)
+═══════════════════════════════════════════════════════════════ */
+
+.warning-card {
+    display: flex;
+    /* Flex layout */
+    align-items: center;
+    /* Vertically center aligned */
+    gap: 17px;
+    /* Icon aur text ke beech 9px space */
+    width: 100%;
+    /* Full width */
+    padding: 7px 12px;
+    /* Padding */
+    background: radial-gradient(circle at 10% 20%, rgba(241, 201, 75, 0.22) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(255, 253, 240, 0.94) 0%, rgba(255, 248, 222, 0.76) 100%);
+    /* Glassy yellow notice gradient with spread aura */
+    backdrop-filter: blur(14px);
+    /* Blur effect */
+    -webkit-backdrop-filter: blur(14px);
+    /* Webkit blur */
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    /* Top glass border */
+    border-bottom: 1.5px solid #E8C140;
+    /* Bottom 3D amber border */
+    border-radius: var(--r);
+    /* 16px iOS rounded corners */
+    box-shadow: 0 4px 14px rgba(200, 160, 40, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 1);
+    /* 3D depth */
+}
+
+/* Icon box styling removed — icon stands free */
+.warning-icon-wrap {
+    background: none !important;
+    /* Box background hataya gaya hai */
+    border: none !important;
+    /* Box border hatayi gayi hai */
+    box-shadow: none !important;
+    /* Box shadow hatayi gayi hai */
+    width: auto;
+    /* Auto width */
+    height: auto;
+    /* Auto height */
+    display: flex;
+    /* Flex container */
+    align-items: center;
+    /* Center icon */
+    justify-content: center;
+    /* Center icon */
+    flex-shrink: 0;
+    /* Chota nahi hoga */
+}
+
+.warning-icon {
+    width: 35px;
+    /* Icon width */
+    height: 35px;
+    /* Icon height */
+    
+    object-fit: contain;
+    /* Aspect ratio maintain */
+    filter: invert(70%) sepia(80%) saturate(600%) hue-rotate(5deg) brightness(105%) contrast(105%) drop-shadow(0 2px 4px rgba(180, 130, 20, 0.25));
+    /* Amber color + 3D drop shadow */
+}
+
+.warning-copy {
+    flex: 1;
+    /* Text box bacha hua space lega */
+    text-align: left;
+    /* Left align */
+}
+
+.warning-title {
+    font-size: 10px;
+    /* Title font size */
+    font-weight: 700;
+    /* Bold font */
+    color: #654A24;
+    /* Dark brownish text color */
+    font-family: Georgia, serif;
+    /* Elegant serif font */
+    font-style: italic;
+    /* Italic style */
+    margin-bottom: 1px;
+    /* Niche 1px margin */
+}
+
+.warning-body {
+    font-size: 8px;
+    /* Body font size */
+    color: #654A24;
+    /* Dark brown text color */
+    line-height: 1.35;
+    /* Readable line height */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 6: ABOUT DEVELOPER CARD
+═══════════════════════════════════════════════════════════════ */
+
+.developer-card {
+    display: flex;
+    /* Flex layout */
+    align-items: center;
+    /* Vertically center aligned */
+    width: 100%;
+    /* Full width button card */
+    padding: 7px 12px;
+    /* Internal padding */
+    background: radial-gradient(circle at 10% 20%, rgba(109, 36, 245, 0.16) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(250, 250, 255, 0.94) 0%, rgba(240, 242, 255, 0.76) 100%);
+    /* Glassy soft purple gradient with spread aura */
+    backdrop-filter: blur(14px);
+    /* Blur effect */
+    -webkit-backdrop-filter: blur(14px);
+    /* Webkit blur */
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    /* Top glass border */
+    border-bottom: 1.5px solid #CCD2F2;
+    /* Bottom 3D purple border */
+    border-radius: var(--r);
+    /* 16px iOS rounded corners */
+    cursor: pointer;
+    /* Clickable pointer */
+    font-family: inherit;
+    /* Inherit font */
+    gap: 10px;
+    /* Elements ke beech 10px gap */
+    box-shadow: 0 4px 14px rgba(100, 80, 200, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 1);
+    /* iOS 3D depth */
+    transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.18s ease, box-shadow 0.18s ease;
+    /* Smooth hover transition */
+}
+
+.developer-card:hover {
+    transform: translateY(-1.5px);
+    /* Hover par 1.5px upar uthega */
+    border-color: rgba(255, 255, 255, 1);
+    /* Border bright white hogi */
+    box-shadow: 0 6px 18px rgba(100, 80, 200, 0.12), inset 0 1px 1px rgba(255, 255, 255, 1);
+    /* Enhanced hover shadow */
+}
+
+.developer-card:active {
+    transform: translateY(1px) scale(0.99);
+    /* 3D press feel */
+}
+
+/* Icon box styling removed — icon stands free */
+.dev-icon-wrap {
+    background: none !important;
+    /* Box background hataya gaya hai */
+    border: none !important;
+    /* Box border hatayi gayi hai */
+    box-shadow: none !important;
+    /* Box shadow hatayi gayi hai */
+    width: auto;
+    /* Auto width */
+    height: auto;
+    /* Auto height */
+    display: flex;
+    /* Flex container */
+    align-items: center;
+    /* Center icon */
+    justify-content: center;
+    /* Center icon */
+    flex-shrink: 0;
+    /* Shrink nahi hoga */
+}
+
+.dev-icon {
+    width: 35px;
+    /* Dev icon width */
+    height: 35px;
+    /* Dev icon height */
+    object-fit: contain;
+    /* Aspect ratio maintain */
+    filter: drop-shadow(0 2px 4px rgba(109, 36, 245, 0.2));
+    /* Purple 3D drop shadow */
+}
+
+.dev-copy {
+    flex: 1;
+    /* Text box bacha space lega */
+    display: flex;
+    /* Flex layout */
+    flex-direction: column;
+    /* Title upar, subtext niche */
+    text-align: left;
+    /* Left aligned */
+    gap: 0;
+    /* No extra gap */
+}
+
+.dev-title {
+    font-size: 11px;
+    /* Title font size */
+    font-weight: 800;
+    /* Extra bold */
+    color: var(--c-text);
+    /* Dark text */
+}
+
+.dev-sub {
+    font-size: 7.5px;
+    /* Subtitle font size */
+    font-weight: 400;
+    /* Normal weight */
+    color: #59647A;
+    /* Muted purple-grey text */
+}
+
+.dev-arrow {
+    width: 30px;
+    /* Arrow circle width */
+    height: 30px;
+    /* Arrow circle height */
+    border-radius: 50%;
+    /* Poora gol (circle) */
+    background: linear-gradient(135deg, #b0dbf1 0%, #F5F6FD 100%);
+    /* Glassy white gradient */
+    border: 1px solid rgba(226, 228, 244, 0.9);
+    /* Light border */
+    display: grid;
+    /* Grid layout */
+    place-items: center;
+    /* Center arrow */
+    flex-shrink: 0;
+    /* Chota nahi hoga */
+    color: #291084;
+    /* Purple arrow icon color */
+    box-shadow: 0 2px 6px rgba(98, 58, 172, 0.12), inset 0 1px 1px #fff;
+    /* 3D arrow shadow */
+    transition: transform 0.2s ease;
+    /* Hover transition */
+}
+
+.developer-card:hover .dev-arrow {
+    transform: translateX(3px);
+    /* Hover par arrow 3px right shift hoga */
+}
+
+.dev-arrow svg {
+    width: 20px;
+    /* Arrow icon width */
+    height: 20px;
+    /* Arrow icon height */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 7: FOOTER
+═══════════════════════════════════════════════════════════════ */
+
+.app-footer {
+    display: flex;
+    /* Flex row layout */
+    align-items: center;
+    /* Vertically center aligned */
+    justify-content: center;
+    /* Horizontally center aligned */
+    gap: 5px;
+    /* Shield icon aur text ke beech 5px gap */
+    padding: 2px 0 0;
+    /* Top 2px padding */
+    font-size: 12px;
+    /* Footer font size */
+    color: var(--c-muted);
+    /* Muted text color */
+    font-weight: 500;
+    /* Medium weight */
+    opacity: 0.8;
+    /* 70% opacity */
+}
+
+.footer-shield {
+    width: 30px;
+    /* Shield icon width */
+    height: 30px;
+    /* Shield icon height */
+    color: #6C81C4;
+    object-fit: contain;
+    /* Aspect ratio maintain */
+    opacity: 1;
+    /* 60% opacity */
+    filter: drop-shadow(0 1px 2px #6c81c487);
+    /* 3D shadow */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 8: ACCESSIBILITY (Reduced Motion Setting)
+═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        /* Agar user ne OS mein reduced-motion on kiya hai toh animation instant ho jayega */
+        animation-iteration-count: 1 !important;
+        /* Animation baar-baar loop nahi karega */
+        transition-duration: 0.01ms !important;
+        /* Transition turant complete hogi */
+    }
 }

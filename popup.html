@@ -1,86 +1,168 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coursera Auto</title>
     <link rel="stylesheet" href="styles/popup.css">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/clementfive" type="text/css"/>
+
 </head>
-
 <body>
-    <div class="popup-header">
-        <!-- Fancy Dark Mode Toggle -->
-        <div class="toggle-cont">
-            <input class="toggle-input" id="themeToggle" name="toggle" type="checkbox" />
-            <label class="toggle-label" for="themeToggle">
-                <div class="cont-icon">
-                    <span style="--width: 2; --deg: 25; --duration: 11" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 100; --duration: 18" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 280; --duration: 5" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 200; --duration: 3" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 30; --duration: 20" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 300; --duration: 9" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 250; --duration: 4" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 210; --duration: 8" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 100; --duration: 9" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 15; --duration: 13" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 75; --duration: 18" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 65; --duration: 6" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 50; --duration: 7" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 320; --duration: 5" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 220; --duration: 5" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 215; --duration: 2" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 135; --duration: 9" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 45; --duration: 4" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 78; --duration: 16" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 89; --duration: 19" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 65; --duration: 14" class="sparkle"></span>
-                    <span style="--width: 2; --deg: 97; --duration: 1" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 174; --duration: 10" class="sparkle"></span>
-                    <span style="--width: 1; --deg: 236; --duration: 5" class="sparkle"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 30 30" class="toggle-icon">
-                        <path d="M0.96233 28.61C1.36043 29.0081 1.96007 29.1255 2.47555 28.8971L10.4256 25.3552C13.2236 24.11 16.4254 24.1425 19.2107 25.4401L27.4152 29.2747C27.476 29.3044 27.5418 29.3023 27.6047 29.32C27.6563 29.3348 27.7079 29.3497 27.761 29.3574C27.843 29.3687 27.9194 29.3758 28 29.3688C28.1273 29.3617 28.2531 29.3405 28.3726 29.2945C28.4447 29.262 28.5162 29.2287 28.5749 29.1842C28.6399 29.1446 28.6993 29.0994 28.7509 29.0477L28.9008 28.8582C28.9468 28.7995 28.9793 28.7274 29.0112 28.656C29.0599 28.5322 29.0811 28.4036 29.0882 28.2734C29.0939 28.1957 29.0868 28.1207 29.0769 28.0415C29.0705 27.9955 29.0585 27.9524 29.0472 27.9072C29.0295 27.8343 29.0302 27.7601 28.9984 27.6901L25.1638 19.4855C23.8592 16.7073 23.8273 13.5048 25.0726 10.7068L28.6145 2.75679C28.8429 2.24131 28.7318 1.63531 28.3337 1.2372C27.9165 0.820011 27.271 0.721743 26.7491 0.9961L19.8357 4.59596C16.8418 6.15442 13.2879 6.18696 10.2615 4.70062L1.80308 0.520214C1.7055 0.474959 1.60722 0.441742 1.50964 0.421943C1.44459 0.409215 1.37882 0.395769 1.3074 0.402133C1.14406 0.395769 0.981436 0.428275 0.818095 0.499692C0.77284 0.519491 0.719805 0.545671 0.67455 0.578198C0.596061 0.617088 0.524653 0.675786 0.4596 0.74084C0.394546 0.805894 0.335843 0.877306 0.296245 0.956502C0.263718 1.00176 0.237561 1.05477 0.217762 1.10003C0.152708 1.24286 0.126545 1.40058 0.120181 1.54978C0.120181 1.61483 0.126527 1.6735 0.132891 1.73219C0.15269 1.85664 0.178881 1.97332 0.237571 2.08434L4.41798 10.5427C5.91139 13.5621 5.8725 17.1238 4.3204 20.1099L0.720514 27.0233C0.440499 27.5536 0.545137 28.1928 0.96233 28.61Z"></path>
-                    </svg>
+    <main class="app-container">
+
+        <!-- ═══ 1. HERO — ONE SINGLE IMAGE (logo + title + tagline baked in) ═══ -->
+        <section class="hero">
+            <img class="hero-image"
+                 src="icons and image/logo_coursera_blue.jpeg"
+                 alt="Coursera Auto — Smarter Browser Automation"
+                 draggable="false">
+        </section>
+
+        <!-- ═══ 2. STATUS CARD ═══ -->
+        <section class="status-card">
+            <div class="status-half" id="systemStatusCol">
+                <div class="status-icon-box">
+                    <img src="icons and image/icon_status_sign.png" alt="" class="status-icon" draggable="false">
                 </div>
-            </label>
+                <div class="status-text">
+                    <span class="status-label">SYSTEM STATUS</span>
+                    <span class="status-value" id="systemStatus" aria-live="polite">
+                        <span class="status-dot dot-idle" id="statusDot"></span>
+                        <span id="statusLabelText">Idle</span>
+                    </span>
+                </div>
+            </div>
+            <div class="status-divider"></div>
+            <div class="status-half" id="workerStatusCol">
+                <div class="status-icon-box">
+                    <img src="icons and image/icon_sloth.svg" alt="" class="status-icon" id="workerIcon" draggable="false">
+                </div>
+                <div class="status-text">
+                    <span class="status-label">WORKER</span>
+                    <span class="status-value" id="workerStatus" aria-live="polite">
+                        <span class="status-dot dot-inactive" id="workerDot"></span>
+                        <span id="workerLabelText">Inactive</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 3. STATS GRID ═══ -->
+        <section class="stats-grid">
+
+            <!-- Videos Completed Counter -->
+            <article class="stat-card card-warm">
+                <div class="stat-top">
+                    <div class="stat-icon-box icon-warm">
+                        <img src="icons and image/icon_video_camera.svg" alt="" class="stat-icon-img" draggable="false">
+                    </div>
+                    <div class="stat-labels">
+                        <span class="stat-micro">VIDEOS  COMPLETED</span>
+                    </div>
+                </div>
+                <div class="video-counter-value" id="videosCompletedVal" aria-live="polite">0</div>
+                <div class="video-pill" id="videoIndicator">
+                    <span class="status-dot dot-session"></span>
+                    <span id="videoStatusLabel">Auto Skipped & Done</span>
+                </div>
+            </article>
+
+            <!-- Time Spent -->
+            <article class="stat-card card-cool">
+                <div class="stat-top">
+                    <div class="stat-icon-box icon-cool">
+                        <img src="icons and image/icon_stopwatch.svg" alt="" class="stat-icon-img" draggable="false">
+                    </div>
+                    <div class="stat-labels">
+                        <span class="stat-micro">TIME SPENT</span>
+                    </div>
+                </div>
+                <div class="timer-value" id="timerVal" aria-live="polite">00:08:34</div>
+                <div class="session-pill" id="sessionIndicator">
+                    <span class="status-dot dot-session"></span>
+                    <span id="sessionLabel">Active Session</span>
+                </div>
+            </article>
+        </section>
+
+        <!-- ═══ 4. CTA — START / MODE / STOP ═══ -->
+        <div class="cta-zone">
+            <!-- Start -->
+            <button class="cta-btn cta-start" id="startBtn" type="button">
+                <div class="cta-icon-wrap">
+                    <img src="icons and image/icon_gears.svg" alt="" class="cta-gear" draggable="false">
+                </div>
+                <div class="cta-copy">
+                    <span class="cta-title">Start Automation</span>
+                    <span class="cta-sub">Start smart learning automation</span>
+                </div>
+                <div class="cta-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+            </button>
+
+            <!-- Mode Select -->
+            <div class="mode-row" id="modeButtons" style="display:none">
+                <button class="mode-btn" id="videoBtn" type="button">
+                    <img src="icons and image/icon_video_camera.svg" alt="" class="mode-icon" draggable="false">
+                    <span>Video</span>
+                </button>
+                <button class="mode-btn" id="readingBtn" type="button">
+                    <img src="icons and image/icon_books.svg" alt="" class="mode-icon" draggable="false">
+                    <span>Reading</span>
+                </button>
+            </div>
+
+            <!-- Stop -->
+            <button class="cta-btn cta-stop" id="stopBtn" type="button" style="display:none">
+                <div class="cta-icon-wrap cta-icon-stop">
+                    <img src="icons and image/icon_gears.svg" alt="" class="cta-gear gear-spin" draggable="false">
+                </div>
+                <div class="cta-copy">
+                    <span class="cta-title cta-title-red">Stop Automation</span>
+                    <span class="cta-sub cta-sub-red">Automation is running…</span>
+                </div>
+                <div class="cta-arrow cta-arrow-red">
+                    <svg viewBox="0 0 24 24" fill="#fff"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+                </div>
+            </button>
         </div>
-        <img src="icon.png">
-    </div>
-    <h2>Coursera Auto</h2>
 
-    <div class="status-box">
-        Status: <span id="status">Idle</span>
-    </div>
+        <!-- ═══ 5. WARNING ═══ -->
+        <section class="warning-card">
+            <div class="warning-icon-wrap">
+                <img src="icons and image/icon_warning.svg" alt="" class="warning-icon" draggable="false">
+            </div>
+            <div class="warning-copy">
+                <p class="warning-title">For Educational purpose only.</p>
+                <p class="warning-body">This tool is intended to demonstrate browser automation concepts. Please use responsibly.</p>
+            </div>
+        </section>
 
-    <!-- Session Stats -->
-    <div class="session-stats">
-        <div class="stat-item">
-            <span class="stat-value" id="videoCount">0</span>
-            <span class="stat-label">Videos</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-value" id="readingCount">0</span>
-            <span class="stat-label">Readings</span>
-        </div>
-    </div>
+        <!-- ═══ 6. ABOUT DEVELOPER ═══ -->
+        <button class="developer-card" id="aboutBtn" type="button">
+            <div class="dev-icon-wrap">
+                <img src="icons and image/icon_developer.svg" alt="" class="dev-icon" draggable="false">
+            </div>
+            <div class="dev-copy">
+                <span class="dev-title">About Developer</span>
+                <span class="dev-sub">Know more about the creator of this tool</span>
+            </div>
+            <div class="dev-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+        </button>
 
-    <button id="startBtn">Start Automation ⚡</button>
-    <button id="readingBtn">Complete Reading 📖</button>
-    <button id="stopBtn">Stop Automation ◼</button>
+        <!-- ═══ 7. FOOTER ═══ -->
+        <footer class="app-footer">
+            <img src="icons and image/icon_shield_check.svg" alt="" class="footer-shield" draggable="false">
+            <span>Use responsibly. Happy Learning!</span>
+        </footer>
 
-    <div class="about-section">
-        <button id="aboutBtn">About Developer ✪</button>
-    </div>
-
-    <div class="disclaimer-banner">
-        ⚠️ <strong>For educational purposes only.</strong> This tool is intended to demonstrate browser automation concepts. Please use responsibly.
-    </div>
-
-    <div class="footer">
-        Use responsibly. Happy learning!
-    </div>
+    </main>
 
     <script src="popup.js"></script>
     <script src="updateChecker.js"></script>
 </body>
-
 </html>
