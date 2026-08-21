@@ -2,6 +2,36 @@
 
 let isRunning = false;
 let automationInterval = null;
+let _scrapeIntervalId = null;
+
+// --- Extension Context Validity Check ---
+// Jab extension reload/update hota hai, purana content script ka chrome context
+// invalid ho jata hai. Ye function check karta hai ki context abhi valid hai ya nahi.
+function isExtensionValid() {
+    try {
+        return !!(chrome && chrome.runtime && chrome.runtime.id);
+    } catch (e) {
+        return false;
+    }
+}
+
+// Agar context invalid ho jaye toh saare intervals band kar do
+function cleanupOnInvalidContext() {
+    console.warn('[Coursera Auto] Extension context invalidated — cleaning up intervals.');
+    isRunning = false;
+    if (automationInterval) {
+        clearInterval(automationInterval);
+        automationInterval = null;
+    }
+    if (window._courseraAutoInterval) {
+        clearInterval(window._courseraAutoInterval);
+        window._courseraAutoInterval = null;
+    }
+    if (_scrapeIntervalId) {
+        clearInterval(_scrapeIntervalId);
+        _scrapeIntervalId = null;
+    }
+}
 
 const CONFIG = {
     scrollSpeed: 50, // ms
@@ -65,40 +95,53 @@ function showToast(message, type = 'info') {
 
 // --- Session Stats & Progress Helper ---
 function incrementStat(key) {
-    chrome.storage.local.get([key], function (result) {
-        const current = result[key] || 0;
-        chrome.storage.local.set({ [key]: current + 1 });
-    });
+    if (!isExtensionValid()) { cleanupOnInvalidContext(); return; }
+    try {
+        chrome.storage.local.get([key], function (result) {
+            if (!isExtensionValid()) return;
+            const current = result[key] || 0;
+            chrome.storage.local.set({ [key]: current + 1 });
+        });
+    } catch (e) {
+        cleanupOnInvalidContext();
+    }
 }
 
 // Scrape course progress from the left sidebar
 function scrapeProgress() {
-    // Look for progress indicators. Coursera often uses aria-valuenow or specific text
-    const progressBars = document.querySelectorAll('[aria-valuenow]');
-    for (const bar of progressBars) {
-        const val = parseInt(bar.getAttribute('aria-valuenow'), 10);
-        if (!isNaN(val) && val >= 0 && val <= 100) {
-            chrome.storage.local.set({ courseProgress: val });
-            return;
+    // Pehle check karo ki extension context valid hai ya nahi
+    if (!isExtensionValid()) { cleanupOnInvalidContext(); return; }
+
+    try {
+        // Look for progress indicators. Coursera often uses aria-valuenow or specific text
+        const progressBars = document.querySelectorAll('[aria-valuenow]');
+        for (const bar of progressBars) {
+            const val = parseInt(bar.getAttribute('aria-valuenow'), 10);
+            if (!isNaN(val) && val >= 0 && val <= 100) {
+                chrome.storage.local.set({ courseProgress: val });
+                return;
+            }
         }
-    }
-    
-    // Fallback: look for text like "X% completed"
-    const textNodes = Array.from(document.querySelectorAll('span, p, div')).filter(el => {
-        const text = el.innerText || '';
-        return text.includes('% completed') || text.includes('% complete');
-    });
-    
-    for (const node of textNodes) {
-        const match = node.innerText.match(/(\d+)%/);
-        if (match && match[1]) {
-            chrome.storage.local.set({ courseProgress: parseInt(match[1], 10) });
-            return;
+
+        // Fallback: look for text like "X% completed"
+        const textNodes = Array.from(document.querySelectorAll('span, p, div')).filter(el => {
+            const text = el.innerText || '';
+            return text.includes('% completed') || text.includes('% complete');
+        });
+
+        for (const node of textNodes) {
+            const match = node.innerText.match(/(\d+)%/);
+            if (match && match[1]) {
+                chrome.storage.local.set({ courseProgress: parseInt(match[1], 10) });
+                return;
+            }
         }
+    } catch (e) {
+        cleanupOnInvalidContext();
     }
 }
-// Run progress scraper occasionally
-setInterval(scrapeProgress, 5000);
+// Run progress scraper occasionally (store interval ID taaki baad mein clear kar sakein)
+_scrapeIntervalId = setInterval(scrapeProgress, 5000);
 setTimeout(scrapeProgress, 1500);
 
 let currentMode = 'video'; // 'video' or 'reading'
@@ -111,27 +154,41 @@ if (window._courseraAutoInterval) {
 }
 
 // Initialize state from storage
-chrome.storage.local.get(['isRunning', 'mode'], function (result) {
-    if (result.isRunning) {
-        currentMode = result.mode || 'video';
-        startAutomation();
+if (isExtensionValid()) {
+    try {
+        chrome.storage.local.get(['isRunning', 'mode'], function (result) {
+            if (!isExtensionValid()) return;
+            if (result.isRunning) {
+                currentMode = result.mode || 'video';
+                startAutomation();
+            }
+        });
+    } catch (e) {
+        cleanupOnInvalidContext();
     }
-});
+}
 
 // Listen for messages from popup
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.action === "start") {
-        currentMode = request.mode || 'video';
-        // Allow restart even if already running (mode may have changed)
-        stopAutomation();
-        startAutomation();
-        sendResponse({ status: "started" });
-    } else if (request.action === "stop") {
-        stopAutomation();
-        sendResponse({ status: "stopped" });
+if (isExtensionValid()) {
+    try {
+        chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+            if (!isExtensionValid()) return;
+            if (request.action === "start") {
+                currentMode = request.mode || 'video';
+                // Allow restart even if already running (mode may have changed)
+                stopAutomation();
+                startAutomation();
+                sendResponse({ status: "started" });
+            } else if (request.action === "stop") {
+                stopAutomation();
+                sendResponse({ status: "stopped" });
+            }
+            return true; // Keep message channel open for async sendResponse
+        });
+    } catch (e) {
+        cleanupOnInvalidContext();
     }
-    return true; // Keep message channel open for async sendResponse
-});
+}
 
 function startAutomation() {
     if (isRunning) return;
@@ -425,7 +482,9 @@ function clickNext() {
 function autoCompleteStop() {
     console.log("%c[Coursera Auto] ✅ All tasks completed! Auto-stopping.", "color: #28a745; font-size: 16px; font-weight: bold;");
     stopAutomation();
-    chrome.storage.local.set({ isRunning: false });
+    if (isExtensionValid()) {
+        try { chrome.storage.local.set({ isRunning: false }); } catch (e) { /* context invalid */ }
+    }
     showToast('All tasks completed! 🎉', 'success');
     showCompletionBanner();
 }
@@ -496,7 +555,9 @@ function isSensitiveItem(btn) {
     if (foundKeyword) {
         console.log(`[Coursera Auto] STOPPING: Next item appears to be '${foundKeyword}'. Please complete manually.`);
         stopAutomation();
-        chrome.storage.local.set({ isRunning: false });
+        if (isExtensionValid()) {
+            try { chrome.storage.local.set({ isRunning: false }); } catch (e) { /* context invalid */ }
+        }
         // Use a non-blocking notification instead of alert()
         showStopBanner(foundKeyword);
         return true;
